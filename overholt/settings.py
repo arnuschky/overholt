@@ -9,8 +9,10 @@
 DEBUG = True
 SECRET_KEY = 'super-secret-key'
 
-SQLALCHEMY_DATABASE_URI = 'mysql://root@33.33.33.10:3306/overholt'
-CELERY_BROKER_URL = 'redis://33.33.33.10:6379/0'
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 
 MAIL_DEFAULT_SENDER = 'info@overholt.com'
 MAIL_SERVER = 'smtp.postmarkapp.com'

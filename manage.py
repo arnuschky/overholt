@@ -6,7 +6,7 @@
     Manager module
 """
 
-from flask.ext.script import Manager
+from flask_script import Manager
 
 from overholt.api import create_app
 from overholt.manage import CreateUserCommand, DeleteUserCommand, ListUsersCommand

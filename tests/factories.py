@@ -9,7 +9,7 @@
 from datetime import datetime
 
 from factory import Factory, Sequence, LazyAttribute
-from flask.ext.security.utils import encrypt_password
+from flask_security.utils import encrypt_password
 
 from overholt.core import db
 from overholt.models import *

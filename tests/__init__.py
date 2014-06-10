@@ -6,7 +6,7 @@
     tests package
 """
 
-from flask.ext.fillin import FormWrapper
+from flask_fillin import FormWrapper
 from flask.testing import FlaskClient
 from unittest import TestCase
 
