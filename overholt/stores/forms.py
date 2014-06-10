@@ -6,7 +6,9 @@
     Store forms
 """
 
-from flask_wtf import Form, TextField, Required, Optional
+from flask.ext.wtf import Form
+from wtforms import TextField
+from wtforms.validators import Required, Optional
 
 __all__ = ['NewStoreForm', 'UpdateStoreForm']
 

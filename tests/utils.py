@@ -26,17 +26,6 @@ def get_auth_headers(username=None, password=None):
 
 class FlaskTestCaseMixin(object):
 
-    def _create_csrf_token(self):
-        csrf_key = 'csrf_token'
-        with self.client.session_transaction() as session:
-            session['csrf'] = csrf_key
-        secret_key = self.app.config['SECRET_KEY']
-        expires = (datetime.now() + timedelta(minutes=30)).strftime('%Y%m%d%H%M%S')
-        csrf_build = '%s%s' % (csrf_key, expires)
-        csrf_token = csrf_build.encode('utf8')
-        csrf_hmac = hmac.new(secret_key, csrf_token, digestmod=sha1)
-        self.csrf_token = '%s##%s' % (expires, csrf_hmac.hexdigest())
-
     def _html_data(self, kwargs):
         if 'data' in kwargs:
             kwargs['data']['csrf_token'] = self.csrf_token

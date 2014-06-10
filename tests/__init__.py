@@ -6,11 +6,13 @@
     tests package
 """
 
+from flask.ext.fillin import FormWrapper
+from flask.testing import FlaskClient
 from unittest import TestCase
 
 from overholt.core import db
 
-from .factories import UserFactory
+from .factories import UserFactory, RoleFactory
 from .utils import FlaskTestCaseMixin
 
 
@@ -24,17 +26,17 @@ class OverholtAppTestCase(FlaskTestCaseMixin, OverholtTestCase):
         raise NotImplementedError
 
     def _create_fixtures(self):
-        self.user = UserFactory()
+        role = RoleFactory()
+        self.user = UserFactory(roles=[role])
 
     def setUp(self):
         super(OverholtAppTestCase, self).setUp()
         self.app = self._create_app()
-        self.client = self.app.test_client()
+        self.client = FlaskClient(self.app, response_wrapper=FormWrapper)
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
         self._create_fixtures()
-        self._create_csrf_token()
 
     def tearDown(self):
         super(OverholtAppTestCase, self).tearDown()
@@ -42,6 +44,8 @@ class OverholtAppTestCase(FlaskTestCaseMixin, OverholtTestCase):
         self.app_context.pop()
 
     def _login(self, email=None, password=None):
+        r = self.get('/login')
+        self.csrf_token = r.form.fields['csrf_token']
         email = email or self.user.email
         password = password or 'password'
         return self.post('/login', data={'email': email, 'password': password},

@@ -5,9 +5,9 @@
 
     Product forms
 """
-
-from flask_wtf import Form, TextField, SelectMultipleField, Required, \
-    Optional
+from flask.ext.wtf import Form
+from wtforms import TextField, SelectMultipleField
+from wtforms.validators import Required, Optional
 
 from ..services import products
 
