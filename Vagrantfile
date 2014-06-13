@@ -9,11 +9,11 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "flask-example-berkshelf"
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "quantal64-vanilla"
+  config.vm.box = "virtualbox"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "https://dl.dropboxusercontent.com/u/165709740/boxes/quantal64-vanilla.box"
+  config.vm.box_url = "https://vagrantcloud.com/ubuntu/trusty64/version/1/provider/virtualbox.box"
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
